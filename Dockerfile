@@ -13,7 +13,8 @@ COPY ./books.csv ./books.csv
 COPY ./server/requirements.txt ./server/requirements.txt
 
 # Install Python dependencies
-RUN pip3 install --no-cache-dir -r server/requirements.txt
+RUN pip3 install pandas numpy scikit-learn
+
 
 # Install Node dependencies for backend
 RUN npm install --prefix server
