@@ -4,7 +4,11 @@ const bodyParser = require("body-parser");
 const recommend = require("./recommend"); // make sure this file exports a function
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://book-recommender-2hld.onrender.com",
+  methods: ["GET","POST","OPTIONS"]
+}));
+
 app.use(bodyParser.json());
 
 app.post("/recommend", async (req, res) => {
