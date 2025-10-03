@@ -3,8 +3,13 @@ const path = require("path");
 
 function recommend(title) {
   return new Promise((resolve, reject) => {
-    const pythonPath = path.join("C:\\Users\\sivas\\miniconda3\\envs\\bookrec\\python.exe"); // your conda env python
-    const py = spawn(pythonPath, ["recommend.py", title], { cwd: __dirname });
+    // Use generic Python installed on the server
+    const pythonPath = "python3";
+
+    // Use relative path to recommend.py
+    const scriptPath = path.join(__dirname, "recommend.py");
+
+    const py = spawn(pythonPath, [scriptPath, title]);
 
     let data = "";
     let error = "";
@@ -30,4 +35,3 @@ function recommend(title) {
 }
 
 module.exports = recommend;
-
