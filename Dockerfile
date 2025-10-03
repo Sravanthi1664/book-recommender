@@ -1,4 +1,3 @@
-# Start from Node + Debian base
 FROM node:22-bullseye
 
 # Install Python 3 and pip
@@ -7,9 +6,14 @@ RUN apt-get update && apt-get install -y python3 python3-pip
 # Set working directory
 WORKDIR /app
 
-# Copy server and client folders
+# Copy server and client folders, plus requirements
 COPY ./server ./server
 COPY ./client ./client
+COPY ./books.csv ./books.csv
+COPY ./server/requirements.txt ./server/requirements.txt
+
+# Install Python dependencies
+RUN pip3 install --no-cache-dir -r server/requirements.txt
 
 # Install Node dependencies for backend
 RUN npm install --prefix server
@@ -20,8 +24,9 @@ RUN npm install --prefix client
 # Build React frontend
 RUN npm run build --prefix client
 
-# Expose the backend port
+# Expose backend port
 EXPOSE 5000
 
 # Start the Node server
 CMD ["node", "server/server.js"]
+
