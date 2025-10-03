@@ -9,7 +9,7 @@ WORKDIR /app
 # Copy server and client folders, plus requirements
 COPY ./server ./server
 COPY ./client ./client
-COPY ./books.csv ./books.csv
+COPY .server/books.csv .server/books.csv
 COPY ./server/requirements.txt ./server/requirements.txt
 
 # Install Python dependencies
