@@ -10,7 +10,7 @@ WORKDIR /app
 COPY ./server ./server
 COPY ./client ./client
 COPY ./server/books.csv ./server/books.csv
-COPY ./server/requirements.txt ./server/requirements.txt
+
 
 # Install Python dependencies
 RUN pip3 install pandas numpy scikit-learn
