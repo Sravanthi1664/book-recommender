@@ -13,7 +13,7 @@ const Homepage = () => {
     setError(null);
 
     try {
-      const res = await fetch("http://localhost:5000/recommend", {
+      const res = await fetch("https://book-recommender1-423t.onrender.com/recommend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title }),
