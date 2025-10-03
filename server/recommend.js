@@ -3,12 +3,13 @@ const path = require("path");
 
 function recommend(title) {
   return new Promise((resolve, reject) => {
-    // Use generic Python installed on the server
+    // Use python3 from the environment
     const pythonPath = "python3";
 
-    // Use relative path to recommend.py
+    // Relative path to recommend.py inside the server folder
     const scriptPath = path.join(__dirname, "recommend.py");
 
+    // Spawn Python process
     const py = spawn(pythonPath, [scriptPath, title]);
 
     let data = "";
@@ -24,11 +25,13 @@ function recommend(title) {
 
     py.on("close", (code) => {
       if (code !== 0) return reject(error || "Python script failed");
+
       try {
+        // Parse the JSON output from Python
         const result = JSON.parse(data);
         resolve(result);
       } catch (e) {
-        reject("Failed to parse Python output");
+        reject("Failed to parse Python output: " + e.message);
       }
     });
   });
